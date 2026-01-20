@@ -9,6 +9,7 @@ import com.example.login.repository.person.PersonRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -18,6 +19,7 @@ import java.util.UUID;
 public class RegisterUserService {
     private static final Logger log = LoggerFactory.getLogger(RegisterUserService.class);
 
+    private final PasswordEncoder passwordEncoder;
     private final PersonRepository personRepository;
     private final PersonMapper personMapper;
 
@@ -28,6 +30,7 @@ public class RegisterUserService {
                 log.warn(registerPersonRequestDto.getEmail()+" ya esta en uso");
                 throw new RegisterUserException("El email ya esta en uso");
             }
+            personEntity.setPassword(passwordEncoder.encode(personEntity.getPassword()));
             personRepository.save(personEntity);
 
             return new RegisterPersonResponseDto("Usuario registrado de forma exitosa");
