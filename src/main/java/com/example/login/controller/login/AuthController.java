@@ -2,7 +2,10 @@ package com.example.login.controller.login;
 
 import com.example.login.dto.login.request.LoginRequestDto;
 import com.example.login.dto.login.response.AuthResponseDto;
+import com.example.login.dto.user.request.RegisterPersonRequestDto;
+import com.example.login.dto.user.response.RegisterPersonResponseDto;
 import com.example.login.service.login.AuthService;
+import com.example.login.service.user.RegisterUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,5 +22,15 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<AuthResponseDto> login(@RequestBody LoginRequestDto loginRequestDto){
         return ResponseEntity.ok(authService.login(loginRequestDto));
+    }
+
+    private final RegisterUserService registerUserService;
+
+    @PostMapping("/register")
+    public ResponseEntity<RegisterPersonResponseDto> postUser(@RequestBody RegisterPersonRequestDto registerPersonRequestDto){
+
+        RegisterPersonResponseDto response=registerUserService.registerUser(registerPersonRequestDto);
+
+        return ResponseEntity.status(201).body(response);
     }
 }

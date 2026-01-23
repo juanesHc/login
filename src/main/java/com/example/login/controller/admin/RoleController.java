@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/admins")
+@RequestMapping("/admin")
 public class RoleController {
     private final RetrieveRolesService retrieveRoleService;
 
