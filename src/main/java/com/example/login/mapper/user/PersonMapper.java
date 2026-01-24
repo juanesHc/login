@@ -25,6 +25,9 @@ public class PersonMapper {
         personEntity.setGivenName(registerPersonRequestDto.getGivenName());
         personEntity.setFamilyName(registerPersonRequestDto.getFamilyName());
 
+        personEntity.setAccountVerified(false);
+        personEntity.setPhone("+57"+registerPersonRequestDto.getPhone());
+
         RoleEntity roleEntity =
                 roleRepository.findByType(RoleEnum.USER);
 
@@ -40,6 +43,7 @@ public class PersonMapper {
 
         personEntity.setEmail(OAuth2GoogleRequestDto.getEmail());
         personEntity.setProvider(AuthEnum.GOOGLE);
+        personEntity.setAccountVerified(true);
 
         personEntity.setGivenName(nameAsArray[0]);
         personEntity.setFamilyName(nameAsArray[1]);

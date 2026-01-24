@@ -15,9 +15,8 @@ public class RoleController {
     private final RetrieveRolesService retrieveRoleService;
 
     @GetMapping("/retrieve/role")
-    public ResponseEntity<RoleDto> getRole(){
+    public ResponseEntity<RoleDto> getRole() {
 
-        RoleDto response=retrieveRoleService.retrieveRoles();
-
-        return ResponseEntity.status(201).body(response);}
+        return ResponseEntity.ok(retrieveRoleService.retrieveRoles());
+    }
 }

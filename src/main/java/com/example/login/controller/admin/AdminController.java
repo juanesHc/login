@@ -19,9 +19,6 @@ public class AdminController {
 
     @PostMapping("/register")
     public ResponseEntity<RegisterWithRoleResponseDto> postUser(@RequestBody RegisterWithRoleRequestDto registerWithRoleRequestDto){
-
-        RegisterWithRoleResponseDto response= registerWithRoleService.registerWithRole(registerWithRoleRequestDto);
-
-        return ResponseEntity.status(201).body(response);
+        return ResponseEntity.ok(registerWithRoleService.registerWithRole(registerWithRoleRequestDto));
     }
 }

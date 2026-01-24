@@ -26,4 +26,8 @@ public class PersonEntity extends BaseEntity{
     @JoinColumn(name = "role_id")
     private RoleEntity role;
 
+    private boolean accountVerified;
+
+    private String phone;
+
 }

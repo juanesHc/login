@@ -1,6 +1,5 @@
 package com.example.login.dto.user.request;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -12,23 +11,33 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class RegisterPersonRequestDto {
-    @NotBlank(message = "El nombre es obligatorio")
-    @Size(min = 2, max = 20, message = "El nombre debe tener entre 2 y 20 caracteres")
+
+    @NotBlank(message = "Given name is required")
+    @Size(min = 2, max = 20)
     private String givenName;
 
-    @NotBlank(message = "El apellido es obligatorio")
-    @Size(min = 2, max = 20, message = "El apellido debe tener entre 2 y 20 caracteres")
+    @NotBlank(message = "Family name is required")
+    @Size(min = 2, max = 20)
     private String familyName;
 
-    @NotBlank(message = "La contraseña es obligatoria")
-    @Size(min = 8, message = "La contraseña debe tener al menos 8 caracteres")
+    @NotBlank(message = "Password is required")
     @Pattern(
-            regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#._-])[A-Za-z\\d@$!%*?&#._-]{8,}$",
-            message = "La contraseña debe contener al menos una mayúscula, una minúscula, un número y un carácter especial"
+            regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
+            message = "Password must be at least 8 characters long and include uppercase, lowercase, number and special character"
     )
     private String password;
 
-    @NotBlank(message = "El email es obligatorio")
-    @Email(message = "El email no tiene un formato válido")
+    @NotBlank(message = "Email is required")
+    @Pattern(
+            regexp = "^[a-zA-Z0-9._%+-]+@(gmail\\.com|googlemail\\.com)$",
+            message = "Only Google email accounts are allowed"
+    )
     private String email;
+
+    @NotBlank(message = "Phone number is required")
+    @Pattern(
+            regexp = "^3\\d{9}$",
+            message = "Phone must be a valid Colombian mobile number (3XXXXXXXXX)"
+    )
+    private String phone;
 }

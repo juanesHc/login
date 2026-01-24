@@ -12,8 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
 @Service
 @RequiredArgsConstructor
 public class RegisterUserService {
@@ -25,11 +23,13 @@ public class RegisterUserService {
 
     public RegisterPersonResponseDto registerUser(RegisterPersonRequestDto registerPersonRequestDto){
         try {
-            PersonEntity personEntity = personMapper.registerPersonRequestDtoToPersonEntity(registerPersonRequestDto);
+
             if(validateEmailUnique(registerPersonRequestDto.getEmail())){
-                log.warn(registerPersonRequestDto.getEmail()+" ya esta en uso");
+                log.warn(registerPersonRequestDto.getEmail()," ya esta en uso");
                 throw new RegisterUserException("El email ya esta en uso");
             }
+
+            PersonEntity personEntity = personMapper.registerPersonRequestDtoToPersonEntity(registerPersonRequestDto);
             personEntity.setPassword(passwordEncoder.encode(personEntity.getPassword()));
             personRepository.save(personEntity);
 
@@ -43,6 +43,4 @@ public class RegisterUserService {
     private boolean validateEmailUnique(String email){
         return personRepository.existsByEmail(email);
     }
-
-
 }
