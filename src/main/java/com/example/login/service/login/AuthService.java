@@ -39,7 +39,7 @@ public class AuthService {
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         AuthResponseDto authResponseDto = new AuthResponseDto();
-        authResponseDto.setToken(jwtService.generateToken(userDetails));
+        authResponseDto.setToken(jwtService.generateToken(userDetails,personEntity.getId()));
 
         return authResponseDto;
     }

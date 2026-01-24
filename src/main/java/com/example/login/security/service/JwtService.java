@@ -12,6 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.Function;
 
 @Service
@@ -30,8 +31,9 @@ public class JwtService {
     }
 
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(UserDetails userDetails, UUID personId) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("id",personId);
         claims.put("role", userDetails.getAuthorities().iterator().next().getAuthority());
 
         return buildToken(claims, userDetails.getUsername());
