@@ -7,12 +7,9 @@ import com.example.login.entity.enums.AuthEnum;
 import com.example.login.exception.RegisterUserException;
 import com.example.login.mapper.user.PersonMapper;
 import com.example.login.repository.person.PersonRepository;
-import com.example.login.security.model.SecurityUser;
-import com.example.login.security.service.JwtService;
+import com.example.login.entity.model.SecurityUser;
+import com.example.login.service.security.JwtService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 

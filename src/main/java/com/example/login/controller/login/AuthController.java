@@ -9,6 +9,7 @@ import com.example.login.service.user.RegisterUserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,16 +20,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;
+    private final RegisterUserService registerUserService;
+
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponseDto> login(@RequestBody LoginRequestDto loginRequestDto){
         return ResponseEntity.ok(authService.login(loginRequestDto));
     }
 
-    private final RegisterUserService registerUserService;
-
     @PostMapping("/register")
     public ResponseEntity<RegisterPersonResponseDto> postUser(@Valid @RequestBody RegisterPersonRequestDto registerPersonRequestDto){
         return ResponseEntity.ok(registerUserService.registerUser(registerPersonRequestDto));
+
+
     }
 }

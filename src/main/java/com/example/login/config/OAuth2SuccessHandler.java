@@ -1,4 +1,4 @@
-package com.example.login.security.config;
+package com.example.login.config;
 
 
 import com.example.login.dto.login.response.AuthResponseDto;

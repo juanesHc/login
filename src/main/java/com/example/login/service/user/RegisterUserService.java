@@ -22,22 +22,22 @@ public class RegisterUserService {
     private final PersonMapper personMapper;
 
     public RegisterPersonResponseDto registerUser(RegisterPersonRequestDto registerPersonRequestDto){
-        try {
 
-            if(validateEmailUnique(registerPersonRequestDto.getEmail())){
-                log.warn(registerPersonRequestDto.getEmail()," ya esta en uso");
-                throw new RegisterUserException("El email ya esta en uso");
-            }
+try {
+    if (validateEmailUnique(registerPersonRequestDto.getEmail())) {
+        log.warn(registerPersonRequestDto.getEmail(), " it is already in use");
+        throw new RegisterUserException("Email it is already in use");
+    }
 
-            PersonEntity personEntity = personMapper.registerPersonRequestDtoToPersonEntity(registerPersonRequestDto);
-            personEntity.setPassword(passwordEncoder.encode(personEntity.getPassword()));
-            personRepository.save(personEntity);
+    PersonEntity personEntity = personMapper.registerPersonRequestDtoToPersonEntity(registerPersonRequestDto);
+    personEntity.setPassword(passwordEncoder.encode(personEntity.getPassword()));
+    personRepository.save(personEntity);
 
-            return new RegisterPersonResponseDto("Usuario registrado de forma exitosa");
-        }catch (Exception exception){
-            log.error("ocurrio un error al registrar al usuario ",exception);
-            throw new RegisterUserException("No se pudo registrar al usuario");
-        }
+    return new RegisterPersonResponseDto("Register in a successful way!!");
+}catch (RegisterUserException registerUserException){
+    log.error("We got a issue register the user",registerUserException);
+    throw new RegisterUserException("We got a issue register the user");
+}
     }
 
     private boolean validateEmailUnique(String email){
