@@ -1,5 +1,6 @@
 package com.example.login.entity;
 
+import com.example.login.entity.enums.TokenTypeEnum;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,4 +21,7 @@ public class SecureTokenEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name="user_id")
     private PersonEntity person;
+
+    @Enumerated(EnumType.STRING)
+    private TokenTypeEnum type;
 }

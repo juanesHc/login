@@ -56,7 +56,7 @@ public final class EmailHtml {
                                     </div>
                                     
                                     <p style="color: #e74c3c; font-size: 14px; line-height: 1.6; margin: 20px 0 0 0; font-weight: bold;">
-                                        This link will expire in 7 minutes.
+                                        This link will expire in 24 hours.
                                     </p>
                                     
                                     <p style="color: #999999; font-size: 14px; line-height: 1.6; margin: 30px 0 0 0;">

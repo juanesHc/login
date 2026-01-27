@@ -1,4 +1,4 @@
-package com.example.login.service.security;
+package com.example.login.service.security.token;
 
 import com.example.login.entity.SecureTokenEntity;
 

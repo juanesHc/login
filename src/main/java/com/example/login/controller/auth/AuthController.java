@@ -6,7 +6,7 @@ import com.example.login.dto.user.request.RegisterPersonRequestDto;
 import com.example.login.dto.user.response.AccountVerifiedDto;
 import com.example.login.dto.user.response.RegisterPersonResponseDto;
 import com.example.login.service.login.AuthService;
-import com.example.login.service.security.impl.VerifyUserService;
+import com.example.login.service.security.token.impl.email.VerifyUserService;
 import com.example.login.service.user.RegisterUserService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;

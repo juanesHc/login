@@ -1,10 +1,11 @@
-package com.example.login.service.security.impl;
+package com.example.login.service.security.token.impl.email;
 
 import com.example.login.entity.PersonEntity;
 import com.example.login.entity.SecureTokenEntity;
 import com.example.login.exception.VerifyUserException;
 import com.example.login.repository.person.PersonRepository;
 import com.example.login.service.messaging.impl.MessagingServiceImpl;
+import com.example.login.service.security.token.impl.SecureTokenServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

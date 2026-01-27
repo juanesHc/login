@@ -6,7 +6,7 @@ import com.example.login.entity.PersonEntity;
 import com.example.login.exception.LoginException;
 import com.example.login.repository.person.PersonRepository;
 
-import com.example.login.service.security.impl.JwtService;
+import com.example.login.service.security.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,8 +1,8 @@
-package com.example.login.service.security.impl;
+package com.example.login.service.security.token.impl;
 
 import com.example.login.entity.SecureTokenEntity;
 import com.example.login.repository.token.SecurityTokenRepository;
-import com.example.login.service.security.SecureTokenService;
+import com.example.login.service.security.token.SecureTokenService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.security.crypto.keygen.BytesKeyGenerator;
@@ -18,7 +18,7 @@ public class SecureTokenServiceImpl implements SecureTokenService {
 
     private static BytesKeyGenerator DEFAULT_TOKEN_GENERATOR= KeyGenerators.secureRandom(12);
 
-    @Value("${token.validity}")
+    @Value("${token.email.validity}")
     private long tokenValidityInSeconds;
 
     private final SecurityTokenRepository securityTokenRepository;
