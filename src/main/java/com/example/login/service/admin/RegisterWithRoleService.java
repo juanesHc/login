@@ -24,17 +24,17 @@ public class RegisterWithRoleService {
         try {
             PersonEntity personEntity = adminMapper. registerWithRoleRequestDtoToPersonEntity(registerWithRoleRequestDto);
             if(validateEmailUnique(registerWithRoleRequestDto.getEmail())){
-                log.warn(registerWithRoleRequestDto.getEmail()+" ya esta en uso");
-                throw new RegisterUserException("El email ya esta en uso");
+                log.warn(registerWithRoleRequestDto.getEmail()," Email it is already in use");
+                throw new RegisterUserException("Email it is already in use");
             }
 
            personRepository.save(personEntity);
 
 
-            return new RegisterWithRoleResponseDto("Usuario registrado de forma exitosa");
+            return new RegisterWithRoleResponseDto("User register in successful way");
         }catch (Exception exception){
-            log.error("ocurrio un error al registrar al usuario ",exception);
-            throw new RegisterUserException("No se pudo registrar al usuario");
+            log.error("We got a issue register the user",exception);
+            throw new RegisterUserException("We got a issue register the user");
         }
     }
 

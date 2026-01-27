@@ -1,4 +1,4 @@
-package com.example.login.security.config;
+package com.example.login.config.security;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

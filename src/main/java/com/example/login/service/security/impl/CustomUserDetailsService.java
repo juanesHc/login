@@ -1,8 +1,8 @@
-package com.example.login.security.service;
+package com.example.login.service.security.impl;
 
 import com.example.login.entity.PersonEntity;
 import com.example.login.repository.person.PersonRepository;
-import com.example.login.security.model.SecurityUser;
+import com.example.login.entity.model.SecurityUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

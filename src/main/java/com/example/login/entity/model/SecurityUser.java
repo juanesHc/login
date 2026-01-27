@@ -1,4 +1,4 @@
-package com.example.login.security.model;
+package com.example.login.entity.model;
 
 import com.example.login.entity.PersonEntity;
 import lombok.RequiredArgsConstructor;

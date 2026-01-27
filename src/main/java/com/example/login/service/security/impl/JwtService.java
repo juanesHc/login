@@ -1,4 +1,4 @@
-package com.example.login.security.service;
+package com.example.login.service.security.impl;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -31,9 +31,10 @@ public class JwtService {
     }
 
 
-    public String generateToken(UserDetails userDetails, UUID personId) {
+    public String generateToken(UserDetails userDetails, UUID personId,boolean accountVerified) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("id",personId);
+        claims.put("accountVerified",accountVerified);
         claims.put("role", userDetails.getAuthorities().iterator().next().getAuthority());
 
         return buildToken(claims, userDetails.getUsername());

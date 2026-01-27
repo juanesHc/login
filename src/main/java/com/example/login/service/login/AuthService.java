@@ -6,7 +6,7 @@ import com.example.login.entity.PersonEntity;
 import com.example.login.exception.LoginException;
 import com.example.login.repository.person.PersonRepository;
 
-import com.example.login.security.service.JwtService;
+import com.example.login.service.security.impl.JwtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,8 +29,8 @@ public class AuthService {
         PersonEntity personEntity = personRepository.findByEmail(loginRequestDto.getEmail());
 
         if (!passwordEncoder.matches(loginRequestDto.getPassword(), personEntity.getPassword())) {
-            log.warn("Contraseña Incorrecta");
-            throw new LoginException("Contraseña incorrecta");
+            log.warn("Wrong password");
+            throw new LoginException("Wrong password");
         }
 
         Authentication authentication = authenticationManager.authenticate(
@@ -39,7 +39,7 @@ public class AuthService {
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         AuthResponseDto authResponseDto = new AuthResponseDto();
-        authResponseDto.setToken(jwtService.generateToken(userDetails,personEntity.getId()));
+        authResponseDto.setToken(jwtService.generateToken(userDetails,personEntity.getId(),personEntity.isAccountVerified()));
 
         return authResponseDto;
     }
