@@ -6,7 +6,7 @@ import com.example.login.entity.PersonEntity;
 import com.example.login.exception.LoginException;
 import com.example.login.repository.person.PersonRepository;
 
-import com.example.login.service.security.JwtService;
+import com.example.login.service.security.impl.JwtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -39,7 +39,7 @@ public class AuthService {
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         AuthResponseDto authResponseDto = new AuthResponseDto();
-        authResponseDto.setToken(jwtService.generateToken(userDetails,personEntity.getId()));
+        authResponseDto.setToken(jwtService.generateToken(userDetails,personEntity.getId(),personEntity.isAccountVerified()));
 
         return authResponseDto;
     }

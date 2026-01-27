@@ -4,6 +4,7 @@ import com.example.login.dto.exception.ErrorDto;
 import com.example.login.exception.MessagingException;
 import com.example.login.exception.RegisterUserException;
 import com.example.login.exception.RetrieveRoleException;
+import com.example.login.exception.VerifyUserException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -45,9 +46,16 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MessagingException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-    public ErrorDto handleSendMessage(RetrieveRoleException ex) {
+    public ErrorDto handleSendMessage(MessagingException ex) {
         log.warn("Sending failed: {}", ex.getMessage());
         return new ErrorDto("SENDING_FAILED", ex.getMessage(), null);
+    }
+
+    @ExceptionHandler(VerifyUserException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorDto handleVerifyAccount(VerifyUserException ex) {
+        log.warn("verify failed: {}", ex.getMessage());
+        return new ErrorDto("VERIFY_FAILED", ex.getMessage(), null);
     }
 
     @ExceptionHandler(Exception.class)

@@ -8,7 +8,7 @@ import com.example.login.exception.RegisterUserException;
 import com.example.login.mapper.user.PersonMapper;
 import com.example.login.repository.person.PersonRepository;
 import com.example.login.entity.model.SecurityUser;
-import com.example.login.service.security.JwtService;
+import com.example.login.service.security.impl.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -20,6 +20,7 @@ public class OAuth2GoogleService {
     private final JwtService jwtService;
     private final PersonRepository personRepository;
     private final PersonMapper personMapper;
+
 
     public AuthResponseDto registerByGoogleProvider(OAuth2GoogleRequestDto OAuth2GoogleRequestDto){
         PersonEntity personEntity = personRepository.findByEmail(OAuth2GoogleRequestDto.getEmail());
@@ -52,7 +53,8 @@ public class OAuth2GoogleService {
 
         String token = jwtService.generateToken(
                 userDetails,
-                personEntity.getId()
+                personEntity.getId(),
+                personEntity.isAccountVerified()
         );
 
         return new AuthResponseDto(token);

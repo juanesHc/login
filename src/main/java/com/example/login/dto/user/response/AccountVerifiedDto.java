@@ -8,5 +8,5 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class AccountVerifiedDto {
-    private boolean accountVerified;
+    private String accountVerifiedMessage;
 }

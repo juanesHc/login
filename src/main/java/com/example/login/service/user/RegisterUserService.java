@@ -6,6 +6,8 @@ import com.example.login.entity.PersonEntity;
 import com.example.login.exception.RegisterUserException;
 import com.example.login.mapper.user.PersonMapper;
 import com.example.login.repository.person.PersonRepository;
+import com.example.login.service.messaging.impl.MessagingServiceImpl;
+import com.example.login.service.security.impl.VerifyUserService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +22,7 @@ public class RegisterUserService {
     private final PasswordEncoder passwordEncoder;
     private final PersonRepository personRepository;
     private final PersonMapper personMapper;
+    private final VerifyUserService verifyUserService;
 
     public RegisterPersonResponseDto registerUser(RegisterPersonRequestDto registerPersonRequestDto){
 
@@ -31,7 +34,8 @@ try {
 
     PersonEntity personEntity = personMapper.registerPersonRequestDtoToPersonEntity(registerPersonRequestDto);
     personEntity.setPassword(passwordEncoder.encode(personEntity.getPassword()));
-    personRepository.save(personEntity);
+    PersonEntity personSaved=personRepository.save(personEntity);
+    verifyUserService.sendRegistrationConfirmationEmail(personSaved);
 
     return new RegisterPersonResponseDto("Register in a successful way!!");
 }catch (RegisterUserException registerUserException){
