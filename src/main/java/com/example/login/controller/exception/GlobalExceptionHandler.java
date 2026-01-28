@@ -1,10 +1,7 @@
 package com.example.login.controller.exception;
 
 import com.example.login.dto.exception.ErrorDto;
-import com.example.login.exception.MessagingException;
-import com.example.login.exception.RegisterUserException;
-import com.example.login.exception.RetrieveRoleException;
-import com.example.login.exception.VerifyUserException;
+import com.example.login.exception.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -37,6 +34,13 @@ public class GlobalExceptionHandler {
         return new ErrorDto("REGISTRATION_FAILED", ex.getMessage(), null);
     }
 
+    @ExceptionHandler(LoginException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorDto handleLogin(LoginException ex) {
+        log.warn("Login failed: {}", ex.getMessage());
+        return new ErrorDto("LOGIN_FAILED", ex.getMessage(), null);
+    }
+
     @ExceptionHandler(RetrieveRoleException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorDto handleRetrieveRole(RetrieveRoleException ex) {
@@ -56,6 +60,27 @@ public class GlobalExceptionHandler {
     public ErrorDto handleVerifyAccount(VerifyUserException ex) {
         log.warn("verify failed: {}", ex.getMessage());
         return new ErrorDto("VERIFY_FAILED", ex.getMessage(), null);
+    }
+
+    @ExceptionHandler(InvalidTokenTypeException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorDto handleInvalidTokens(InvalidTokenTypeException ex) {
+        log.warn("token failed: {}", ex.getMessage());
+        return new ErrorDto("TOKEN_INVALID", ex.getMessage(), null);
+    }
+
+    @ExceptionHandler(TokenExpiredException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorDto handleTokenExpired(TokenExpiredException ex) {
+        log.warn("token failed: {}", ex.getMessage());
+        return new ErrorDto("TOKEN_EXPIRED", ex.getMessage(), null);
+    }
+
+    @ExceptionHandler(TokenNotFoundException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorDto handleTokenNotFound(TokenNotFoundException ex) {
+        log.warn("token failed: {}", ex.getMessage());
+        return new ErrorDto("TOKEN_NOT_FOUND", ex.getMessage(), null);
     }
 
     @ExceptionHandler(Exception.class)

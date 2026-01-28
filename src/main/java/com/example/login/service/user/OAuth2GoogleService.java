@@ -8,7 +8,7 @@ import com.example.login.exception.RegisterUserException;
 import com.example.login.mapper.user.PersonMapper;
 import com.example.login.repository.person.PersonRepository;
 import com.example.login.entity.model.SecurityUser;
-import com.example.login.service.security.impl.JwtService;
+import com.example.login.service.security.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
