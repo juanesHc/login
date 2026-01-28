@@ -69,7 +69,23 @@ public class MessagingServiceImpl implements MessagingService {
     }
 
     @Override
-    public void sendForgotPasswordVerificationMessage(PersonEntity personEntity) {
+    public void sendForgotPasswordVerificationMessage(PersonEntity personEntity, String verificationLink) {
+
+        String htmlContent= emailHtml.buildPasswordResetEmailHtml(personEntity.getGivenName(),verificationLink);
+        try {
+            NotificationRequest request = new NotificationRequest(notificationName, notificationConfig.createUserNotification(personEntity))
+                    .setEmail(new EmailOptions()
+                            .setSubject("Forgot password")
+                            .setHtml(htmlContent)
+                    );
+            log.info("Sending notification request...");
+            String response = notificationConfig.createNotification().send(request);
+            log.info("Response: {}", response);
+        }catch (MessagingException messagingException){
+            log.error("It cant send welcome notification",messagingException);
+            throw new MessagingException("It cant send notification in this moment");
+        }
+
 
     }
 

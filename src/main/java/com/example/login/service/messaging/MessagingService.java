@@ -8,6 +8,6 @@ public interface MessagingService {
 
     void sendWelcomeMessage(PersonEntity personEntity);
 
-    void sendForgotPasswordVerificationMessage(PersonEntity personEntity);
+    void sendForgotPasswordVerificationMessage(PersonEntity personEntity, String verificationLink);
 
 }
